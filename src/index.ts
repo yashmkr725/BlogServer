@@ -1,36 +1,38 @@
-import express, { Application } from "express";
-import dotenv from "dotenv";
-import authRouter from "./routes/auth";
-import mongoose from "mongoose";
+import express, { Application } from 'express';
+import dotenv from 'dotenv';
+import authRouter from './routes/auth';
+import mongoose from 'mongoose';
 
 dotenv.config();
 const app: Application = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
-app.use("/auth", authRouter);
+app.use('/auth', authRouter);
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.json({
-    msg: "This is the default route",
+    msg: 'This is the default route',
   });
 });
 
 const StartDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI!);
-    console.log("Connected to the database");
+    console.log('Connected to the database');
   } catch (e) {
     console.log(e);
   }
 };
 
-const StartServer = () => {
-  StartDB().then(() => {
+const StartServer = async () => {
+  await StartDB().then(() => {
     app.listen(PORT, () => {
       console.log(`Server is started on http://localhost:${PORT}`);
     });
   });
 };
 
-StartServer();
+StartServer().catch((err) => {
+  console.log('Failed to start the server ', err);
+});

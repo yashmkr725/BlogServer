@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from 'mongoose';
 
 const UserSchema = new Schema({
   username: { type: String, require: true, unique: true },
@@ -7,7 +7,7 @@ const UserSchema = new Schema({
 });
 
 const BlogSchema = new Schema({
-  author: { type: mongoose.Schema.Types.ObjectId, ref: "User", require: true },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', require: true },
   body: { type: String },
   tags: [{ type: String }],
   createdAt: {
@@ -19,5 +19,5 @@ const BlogSchema = new Schema({
   },
 });
 
-export const User = model("User", UserSchema);
-export const Blog = model("Blog",BlogSchema)
+export const User = model('User', UserSchema);
+export const Blog = model('Blog', BlogSchema);

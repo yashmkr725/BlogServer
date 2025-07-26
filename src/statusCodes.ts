@@ -4,5 +4,5 @@ export enum StatusCodes {
   UnAuthorized = 403,
   SuccessSignup = 201,
   DBfaliure = 500,
-  Conflict=409
+  Conflict = 409,
 }
